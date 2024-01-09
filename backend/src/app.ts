@@ -1,8 +1,15 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import noteRoutes from "./routes/notes";
+import morgan from "morgan";
 
 const app = express();
+
+// logging package
+app.use(morgan("dev"));
+
+//enables the use json with express
+app.use(express.json());
 
 //Endpoint for an http get request
 app.use("/api/notes", noteRoutes);
