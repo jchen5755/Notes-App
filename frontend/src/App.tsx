@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles/NotesPage.module.css";
+import stylesUtils from "./styles/utils.module.css";
 import logo from "./logo.svg";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Note as NoteModel } from "./models/note";
@@ -29,7 +30,7 @@ function App() {
     return (
         <Container>
             <Button
-                className="mb-4"
+                className={`mb-4 ${stylesUtils.blockCenter}`}
                 onClick={() => {
                     setShowAddNoteDialog(true);
                 }}
