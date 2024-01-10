@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
-import "./App.css";
 import { Button } from "react-bootstrap";
-import { Note } from "./models/note";
+import { Note as NoteModel } from "./models/note";
+import Note from "./components/Note";
 
 function App() {
     //use sate will retrun a 2 element array with a number and a function
-    const [notes, setNotes] = useState<Note[]>([]);
+    const [notes, setNotes] = useState<NoteModel[]>([]);
 
     useEffect(() => {
         async function loadNotes() {
@@ -24,7 +24,13 @@ function App() {
         loadNotes();
     }, []); //the empty array will cause the useEffect to execute once on render. Without it it will execute after every new render
 
-    return <div className="App">{JSON.stringify(notes)}</div>;
+    return (
+        <div>
+            {notes.map((note) => (
+                <Note note={note} key={note._id} />
+            ))}
+        </div>
+    );
 }
 
 export default App;
