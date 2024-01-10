@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import styles from "./styles/NotesPage.module.css";
 import logo from "./logo.svg";
-import { Button } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Note as NoteModel } from "./models/note";
 import Note from "./components/Note";
 
@@ -25,11 +26,15 @@ function App() {
     }, []); //the empty array will cause the useEffect to execute once on render. Without it it will execute after every new render
 
     return (
-        <div>
-            {notes.map((note) => (
-                <Note note={note} key={note._id} />
-            ))}
-        </div>
+        <Container>
+            <Row xs={1} md={2} lg={3} className="g-4">
+                {notes.map((note) => (
+                    <Col key={note._id}>
+                        <Note note={note} className={styles.note} />
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     );
 }
 
