@@ -9,12 +9,18 @@ import { MdDelete } from "react-icons/md";
 
 interface NoteProps {
     note: NoteModel;
+    onNoteClicked: (note: NoteModel) => void;
     onDeleteNoteClicked: (note: NoteModel) => void;
     className?: string;
 }
 
 //passing as a destructured { note }: NoteProps argument to the function
-const Note = ({ note, onDeleteNoteClicked, className }: NoteProps) => {
+const Note = ({
+    note,
+    onNoteClicked,
+    onDeleteNoteClicked,
+    className,
+}: NoteProps) => {
     //unpacking the note properties
     const { title, text, createdAt, updatedAt } = note;
 
@@ -27,7 +33,10 @@ const Note = ({ note, onDeleteNoteClicked, className }: NoteProps) => {
 
     //return the UI that will be rendered on the screen
     return (
-        <Card className={`${styles.noteCard} ${className}`}>
+        <Card
+            className={`${styles.noteCard} ${className}`}
+            onClick={() => onNoteClicked(note)}
+        >
             <Card.Body className={styles.cardBody}>
                 <Card.Title className={stylesUtils.flexCenter}>
                     {title}
