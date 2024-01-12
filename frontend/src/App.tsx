@@ -27,6 +27,18 @@ function App() {
         loadNotes();
     }, []); //the empty array will cause the useEffect to execute once on render. Without it it will execute after every new render
 
+    async function deleteNote(note: NoteModel) {
+        try {
+            await NotesApi.deleteNote(note._id);
+            setNotes(
+                notes.filter((existingNote) => existingNote._id !== note._id)
+            );
+        } catch (error) {
+            console.error(error);
+            alert(error);
+        }
+    }
+
     return (
         <Container>
             <Button
@@ -40,7 +52,11 @@ function App() {
             <Row xs={1} md={2} lg={3} className="g-4">
                 {notes.map((note) => (
                     <Col key={note._id}>
-                        <Note note={note} className={styles.note} />
+                        <Note
+                            note={note}
+                            className={styles.note}
+                            onDeleteNoteClicked={deleteNote}
+                        />
                     </Col>
                 ))}
             </Row>
