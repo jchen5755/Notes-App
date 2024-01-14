@@ -115,3 +115,16 @@ export const login: RequestHandler<
         next(error);
     }
 };
+
+export const logout: RequestHandler = (req, res, next) => {
+    //express session specific syntax
+    //session.destroy does not return a promise sop it is not wrapped in a trycatch
+    //Instead a callback is used for error handling
+    req.session.destroy((error) => {
+        if (error) {
+            next(error);
+        } else {
+            res.sendStatus(200);
+        }
+    });
+};
