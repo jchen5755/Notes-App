@@ -7,6 +7,8 @@ import { Note as NoteModel } from "./models/note";
 import Note from "./components/Note";
 import * as NotesApi from "./network/notes_api";
 import AddEditNoteDialog from "./components/AddEditNoteDialog";
+import SignUpModal from "./components/SignUpModal";
+import LoginModal from "./components/LoginModal";
 
 function App() {
     //use state will retrun a 2 element array with a number and a function
@@ -109,6 +111,15 @@ function App() {
                         setNoteToEdit(null);
                     }}
                 />
+            )}
+            {false && (
+                <SignUpModal
+                    onDismiss={() => {}}
+                    onSignUpSuccessful={() => {}}
+                />
+            )}
+            {true && (
+                <LoginModal onDismiss={() => {}} onLoginSuccessful={() => {}} />
             )}
         </Container>
     );
