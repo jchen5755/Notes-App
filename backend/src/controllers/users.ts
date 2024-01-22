@@ -43,7 +43,10 @@ export const signUp: RequestHandler<
         }).exec();
 
         if (existingUsername) {
-            throw createHttpError(409, "Username already taken");
+            throw createHttpError(
+                409,
+                "Username already taken. Please choose a different one or log in."
+            );
         }
 
         const existingEmail = await UserModel.findOne({
@@ -53,7 +56,7 @@ export const signUp: RequestHandler<
         if (existingEmail) {
             throw createHttpError(
                 409,
-                "An account with this email already exists"
+                "An account with this email already exists. Please log in instead."
             );
         }
 
