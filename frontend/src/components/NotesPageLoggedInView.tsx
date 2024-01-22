@@ -64,7 +64,7 @@ const NotesPageLoggedInView = () => {
     return (
         <>
             <Button
-                className={`mb-4 ${stylesUtils.blockCenter}`}
+                className={`mb-4 ${stylesUtils.blockCenter} ${stylesUtils.flexCenter}`}
                 onClick={() => {
                     setShowAddNoteDialog(true);
                 }}
