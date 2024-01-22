@@ -1,12 +1,13 @@
+import MongoStore from "connect-mongo";
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
+import session from "express-session";
+import createHttpError, { isHttpError } from "http-errors";
+import morgan from "morgan";
+import { requiresAuth } from "./middleware/auth";
 import noteRoutes from "./routes/notes";
 import userRoutes from "./routes/users";
-import morgan from "morgan";
-import createHttpError, { isHttpError } from "http-errors";
-import session from "express-session";
 import env from "./util/validateEnv";
-import MongoStore from "connect-mongo";
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use(
 );
 
 //Endpoint for an http get request
-app.use("/api/notes", noteRoutes);
+app.use("/api/notes", requiresAuth, noteRoutes);
 
 app.use("/api/users", userRoutes);
 

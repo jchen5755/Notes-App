@@ -3,6 +3,7 @@ import { InferSchemaType, Schema, model } from "mongoose";
 // outlines the schema use to store notes in the DB
 const noteSchema = new Schema(
     {
+        userId: { type: Schema.Types.ObjectId, required: true },
         title: { type: String, required: true },
         text: { type: String },
     },
